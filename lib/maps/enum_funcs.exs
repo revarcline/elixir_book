@@ -35,17 +35,22 @@ defmodule MyEnum do
   # split(list, int)
   # leave int elements in first list, return rest or empty. positive counts
   # from front, negative from end
-  def split([], _int), do: []
+  def split([], _int), do: { [],[] }
+  def split(list, 0), do: { [], list }
+  def split(list, int) when count < 0, do: split(list, length(list) + int)
 
-  def split([head | tail], int) do
+  def split([head|tail]) do
+    {first, second} = split(tail, int - 1)
+    {[head | first], second}
   end
 
   # take(list, int)
   # return the first int elements for positive, last int elements for negative
-
-  # reverse(list)
-  # reverse elements in list
+  def take([], _int), do: []
+  def take(_list, 0), do: []
+  def take([head|tail], int), when int > 0 do: [head|take(n-1)]
 
   # flatten(list)
   # puts all elements on top level of list
+  # use Enum.reverse
 end
