@@ -12,6 +12,16 @@ orders = [
 tax_rates = [NC: 0.075, TX: 0.08]
 
 defmodule SalesTax do
-  def apply(orders, list) do
+  def all_orders(orders, taxes) do
+    orders |> Enum.map(&apply_tax(&1, taxes))
+  end
+
+  def apply_tax(order = [id: _, ship_to: state, net_amount: net], taxes) do
+    taxes = Keyword.get(taxes, state, 0)
+    tax = net * taxes
+    total = net + tax
+    Keyword.put(order, :total_amount, total)
   end
 end
+
+IO.inspect(SalesTax.all_orders(orders, tax_rates))
