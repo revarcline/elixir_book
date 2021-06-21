@@ -49,5 +49,6 @@ defmodule FileProcessor do
   end
 end
 
-orders = FileProcessor.read("./sales.csv")
+# /home/arcline/code/pragmatic/elixir_book/string/
+orders = FileProcessor.read("sales.csv")
 IO.inspect(Taxes.all_orders(orders))
