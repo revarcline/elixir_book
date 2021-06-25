@@ -1,15 +1,25 @@
 defmodule TestStats do
   use ExUnit.Case
-  @int_list: [1, 3, 5, 7, 9]
 
-  test "calculates sum of list of ints" do
-    assert Stats.sum(@int_list) == 25
+  describe "Stats on lists of ints" do
+    setup do
+      [
+        list: [1, 3, 5, 7, 9, 11],
+        sum: 36,
+        count: 6
+      ]
+    end
 
-  test "calculates count" do
-    assert Stats.count(@int_list) == 5
-  end
+    test "calculates sum" fixture do
+      assert Stats.sum(fixture.list) == fixture.sum
+    end
 
-  test "calculates average" do
-    assert Stats.average(@int_list) == 5
+    test "calculates count" fixture do
+      assert Stats.count(fixture.list) == fixture.count
+    end
+
+    test "calculates average" fixture do
+      assert Stats.average(fixture.list) == fixture.sum / fixture.count
+    end
   end
 end
